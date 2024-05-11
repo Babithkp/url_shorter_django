@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Url Shorter</title>
+</head>
+
+<body>
+    <div style="display: flex; width: 100%; justify-content: center; align-items: center; flex-direction: column;">
+        <h1>URL Shorter from Babith K P</h1>
+        <div style="width: 40%;">
+            <form method="post" action="" style="display: flex; gap: 10px;">
+                {% csrf_token %}
+                <input style="padding: 5px; width: 100%;" placeholder="Enter Your URL" name="long_url" />
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div>
+
+        </div>
+        <table border="1" style="margin-top: 20px; width: 40%;">
+            <tr>
+                <th>Long url</th>
+                <th>Shorten url</th>
+                <th>No of clicks</th>
+            </tr>
+            <tbody>
+                {% for url_details in long_url %}
+                <tr>
+                    <td>{{url_details.long_url}}</td>
+                    <td>
+                        <a href="http://{{ request.META.HTTP_HOST }}{%url 'redirect' pk=url_details.id %}" target="_blank">
+                            {{ url_details.id }}
+                        </a>
+                    </td>
+                    <td>{{url_details.no_clicks}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
